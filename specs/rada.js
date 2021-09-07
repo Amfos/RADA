@@ -28,4 +28,5 @@ import DefaultValues from "../defaultValues.js";
   await resultPage.numberOfResults();
   await resultPage.headerRadaCheck();
   await resultPage.checkInputValue();
+  await resultPage.checkAmountOfVideoNews();
 })();

@@ -5,6 +5,8 @@ export default class ResultPage {
   totalResult =
     "//div[@class='search-heading' and contains(text(),'Результати запиту')]";
   h1Rada = "//*[@id='header']//h1";
+  videoLabels = "//ol[@class='search-result']";
+  videoTest = "//li[@class=meeting_search_result']";
 
   constructor(page) {
     this.page = page;
@@ -33,5 +35,14 @@ export default class ResultPage {
         this.defaultValues.president
       )}`
     );
+  }
+  async checkAmountOfVideoNews() {
+    const videoLabels = await this.page.waitForXPath(this.videoLabels);
+    let videos = await this.page.evaluate(
+      (el) => el.getElementsByClassName("btn-video"),
+      videoLabels
+    );
+    const countedVideoNews = Object.keys(videos).length;
+    console.log(`News with video stream = ${countedVideoNews}`);
   }
 }
