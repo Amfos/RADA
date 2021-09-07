@@ -31,4 +31,5 @@ import ResultPage from "../pages/ResultPage.js";
   await resultPage.headerRadaCheck(nameRadaCheck);
   await resultPage.checkInputValue(president);
   await resultPage.checkAmountOfVideoNews();
+  await browser.close();
 })();
