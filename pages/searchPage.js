@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer";
-import DefaultValues from "../defaultValues.js";
 
 export default class SearchPage {
   inputNameField = "input[name='search'].form-control";
@@ -10,11 +9,10 @@ export default class SearchPage {
 
   constructor(page) {
     this.page = page;
-    this.defaultValues = new DefaultValues(page);
   }
 
-  async typePresidentName() {
-    await this.page.type(this.inputNameField, this.defaultValues.president);
+  async typePresidentName(president) {
+    await this.page.type(this.inputNameField, president);
   }
   async clickOnSectionButton() {
     await this.page.click(this.sectionButton);

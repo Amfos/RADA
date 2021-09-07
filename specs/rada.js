@@ -2,7 +2,6 @@ import puppeteer from "puppeteer";
 import HomePage from "../pages/homePage.js";
 import SearchPage from "../pages/searchPage.js";
 import ResultPage from "../pages/ResultPage.js";
-import DefaultValues from "../defaultValues.js";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -16,17 +15,20 @@ import DefaultValues from "../defaultValues.js";
   const homePage = new HomePage(page);
   const searchPage = new SearchPage(page);
   const resultPage = new ResultPage(page);
-  const defaultValues = new DefaultValues(page);
 
-  await homePage.goToHomePage(defaultValues.url);
+  const president = "Президент";
+  const nameRadaCheck = "Верховна Рада України";
+  const url = "https://www.rada.gov.ua/";
+
+  await homePage.goToHomePage(url);
   await homePage.goToSearchPage();
-  await searchPage.typePresidentName();
+  await searchPage.typePresidentName(president);
   await searchPage.clickOnSectionButton();
   await searchPage.clickOnDropDownMenu();
   await searchPage.clickRadioButton();
   await searchPage.clickOnSearch();
   await resultPage.numberOfResults();
-  await resultPage.headerRadaCheck();
-  await resultPage.checkInputValue();
+  await resultPage.headerRadaCheck(nameRadaCheck);
+  await resultPage.checkInputValue(president);
   await resultPage.checkAmountOfVideoNews();
 })();
