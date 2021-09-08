@@ -1,7 +1,8 @@
-import puppeteer from "puppeteer";
+import puppeteer, { Connection } from "puppeteer";
 import HomePage from "../pages/homePage.js";
 import SearchPage from "../pages/searchPage.js";
 import ResultPage from "../pages/resultPage.js";
+import { connectToBrowser } from "puppeteer-core";
 
 describe("Result status", () => {
   let page;
@@ -22,7 +23,6 @@ describe("Result status", () => {
     homePage = new HomePage(page);
     searchPage = new SearchPage(page);
     resultPage = new ResultPage(page);
-    jest.setTimeout(20000);
   });
 
   // afterEach(async () => {
