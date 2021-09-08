@@ -1,16 +1,17 @@
 import puppeteer from "puppeteer";
 import HomePage from "../pages/homePage.js";
 import SearchPage from "../pages/searchPage.js";
-import ResultPage from "../pages/ResultPage.js";
+import ResultPage from "../pages/resultPage.js";
 
 describe("Result status", () => {
   let page;
   let homePage;
   let searchPage;
   let resultPage;
+  let browser;
 
   beforeEach(async () => {
-    const browser = await puppeteer.launch({
+    browser = await puppeteer.launch({
       headless: false,
       defaultViewport: {
         width: 1280,
@@ -22,6 +23,10 @@ describe("Result status", () => {
     searchPage = new SearchPage(page);
     resultPage = new ResultPage(page);
   });
+
+  // afterEach(async () => {
+  //   await browser.close(), 10000;
+  // });
 
   test("Browser closes", async () => {
     const president = "Президент";
@@ -39,11 +44,10 @@ describe("Result status", () => {
     await resultPage.headerRadaCheck(nameRadaCheck);
     await resultPage.checkInputValue(president);
     await resultPage.checkAmountOfVideoNews();
-    expect(await browser.close()).toBeTrue();
+    expect(await browser.close()).toBeTruthy();
   });
 
-  test("Test msg", async () => {
-    const test = console.log("Test msg");
-    expect;
+  test("adds 1 + 2 to equal 3", async () => {
+    expect(1 + 2).toBe(3);
   });
 });
