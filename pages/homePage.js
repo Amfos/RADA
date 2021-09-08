@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-export default class HomePage {
+export class HomePage {
   searchHomeButton = "input.search_button";
 
   constructor(page) {

@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-export default class ResultPage {
+export class ResultPage {
   totalResult =
     "//div[@class='search-heading' and contains(text(),'Результати запиту')]";
   h1Rada = "//*[@id='header']//h1";
