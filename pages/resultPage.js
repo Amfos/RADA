@@ -21,11 +21,13 @@ export default class ResultPage {
     const h1Rada = await this.page.waitForXPath(this.h1Rada);
     let value = await this.page.evaluate((el) => el.textContent, h1Rada);
     console.log(`H1 is "${value}" and status - ${value === nameRadaCheck}`);
+    return value;
   }
   async checkInputValue(president) {
     const totalResult = await this.page.waitForXPath(this.totalResult);
     let value = await this.page.evaluate((el) => el.textContent, totalResult);
     console.log(`Input value ${president} is ${value.includes(president)}`);
+    return value.includes(president);
   }
   async checkAmountOfVideoNews() {
     const videoLabels = await this.page.waitForXPath(this.videoLabels);

@@ -22,13 +22,14 @@ describe("Result status", () => {
     homePage = new HomePage(page);
     searchPage = new SearchPage(page);
     resultPage = new ResultPage(page);
+    jest.setTimeout(20000);
   });
 
   // afterEach(async () => {
   //   await browser.close(), 10000;
   // });
 
-  test("Browser closes", async () => {
+  test("Rada name check", async () => {
     const president = "Президент";
     const nameRadaCheck = "Верховна Рада України";
     const url = "https://www.rada.gov.ua/";
@@ -41,13 +42,13 @@ describe("Result status", () => {
     await searchPage.clickRadioButton();
     await searchPage.clickOnSearch();
     await resultPage.numberOfResults();
-    await resultPage.headerRadaCheck(nameRadaCheck);
+    expect(await resultPage.headerRadaCheck(nameRadaCheck)).toBe(nameRadaCheck);
     await resultPage.checkInputValue(president);
     await resultPage.checkAmountOfVideoNews();
-    expect(await browser.close()).toBeTruthy();
-  });
+    // await browser.close();
+  }, 20000);
 
-  test("adds 1 + 2 to equal 3", async () => {
-    expect(1 + 2).toBe(3);
-  });
+  // test("adds 1 + 2 to equal 3", async () => {
+  //   expect(1 + 2).toBe(3);
+  // });
 });
