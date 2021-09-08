@@ -45,10 +45,6 @@ describe("Result status", () => {
     expect(await resultPage.headerRadaCheck(nameRadaCheck)).toBe(nameRadaCheck);
     await resultPage.checkInputValue(president);
     await resultPage.checkAmountOfVideoNews();
-    // await browser.close();
+    await browser.close();
   }, 20000);
-
-  // test("adds 1 + 2 to equal 3", async () => {
-  //   expect(1 + 2).toBe(3);
-  // });
 });
