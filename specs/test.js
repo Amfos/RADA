@@ -44,12 +44,11 @@ describe("Result status", () => {
     await resultPage.numberOfResults();
     expect(await resultPage.headerRadaCheck(nameRadaCheck)).toBe(nameRadaCheck);
     expect(await resultPage.getInputtedValue(president)).toContain(president);
-    await resultPage.checkAmountOfVideoNews();
+    await resultPage.checkNumberOfVideos();
   });
 
   test("Open Rada Url", async () => {
     const url = "https://www.rada.gov.ua/";
     await homePage.goToHomePage(url);
-    // expect(1 + 2).toBe(3);
   });
 });

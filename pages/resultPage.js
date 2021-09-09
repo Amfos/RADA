@@ -1,10 +1,9 @@
-import puppeteer from "puppeteer";
+import puppeteer, { ElementHandle } from "puppeteer";
 
 export default class ResultPage {
-  totalResult =
-    "//div[@class='search-heading' and contains(text(),'Результати запиту')]";
-  h1Rada = "//*[@id='header']//h1";
-  videoLabels = "//ol[@class='search-result']";
+  totalResult = `//div[@class='search-heading' and contains(text(),'Результати запиту')]`;
+  h1Rada = `//*[@id='header']//h1`;
+  videoLabel = `//ol[@class='search-result']//span[@class='btn-video']`;
 
   constructor(page) {
     this.page = page;
@@ -29,13 +28,18 @@ export default class ResultPage {
     console.log(`Input value ${president} is ${value.includes(president)}`);
     return value;
   }
-  async checkAmountOfVideoNews() {
-    const videoLabels = await this.page.waitForXPath(this.videoLabels);
-    let videos = await this.page.evaluate(
-      (el) => el.getElementsByClassName("btn-video"),
-      videoLabels
-    );
-    const countedVideoNews = Object.keys(videos).length;
-    console.log(`News with video stream = ${countedVideoNews}`);
+  // async checkAmountOfVideoNews() {
+  //   const videoLabels = await this.page.waitForXPath(this.videoLabels);
+  //   let videos = await this.page.evaluate(
+  //     (el) => el.getElementsByClassName("btn-video"),
+  //     videoLabels
+  //   );
+
+  //   const countedVideoNews = Object.keys(videos).length;
+  //   console.log(`News with video stream = ${countedVideoNews}`);
+  // }
+  async checkNumberOfVideos() {
+    const videoLabelss = await this.page.$x(this.videoLabel);
+    console.log(`News with video stream = ${videoLabelss.length}`);
   }
 }
