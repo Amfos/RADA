@@ -25,9 +25,9 @@ describe("Result status", () => {
     resultPage = new ResultPage(page);
   });
 
-  // afterEach(async () => {
-  //   await browser.close(), 10000;
-  // });
+  afterEach(async () => {
+    await browser.close();
+  });
 
   test("Rada name check", async () => {
     const president = "Президент";
@@ -45,6 +45,9 @@ describe("Result status", () => {
     expect(await resultPage.headerRadaCheck(nameRadaCheck)).toBe(nameRadaCheck);
     expect(await resultPage.checkInputValue(president)).toContain(president);
     await resultPage.checkAmountOfVideoNews();
-    await browser.close();
   }, 20000);
+
+  test("Check 1 + 2 = 3", async () => {
+    expect(1 + 2).toBe(3);
+  });
 });
