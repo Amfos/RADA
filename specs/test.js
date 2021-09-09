@@ -1,8 +1,8 @@
-import puppeteer, { Connection } from "puppeteer";
+import "jest-extended";
+import puppeteer from "puppeteer";
 import HomePage from "../pages/homePage.js";
 import SearchPage from "../pages/searchPage.js";
 import ResultPage from "../pages/resultPage.js";
-import { connectToBrowser } from "puppeteer-core";
 
 describe("Result status", () => {
   let page;
@@ -43,7 +43,7 @@ describe("Result status", () => {
     await searchPage.clickOnSearch();
     await resultPage.numberOfResults();
     expect(await resultPage.headerRadaCheck(nameRadaCheck)).toBe(nameRadaCheck);
-    await resultPage.checkInputValue(president);
+    expect(await resultPage.checkInputValue(president)).toContain(president);
     await resultPage.checkAmountOfVideoNews();
     await browser.close();
   }, 20000);

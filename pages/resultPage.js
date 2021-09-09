@@ -27,7 +27,7 @@ export default class ResultPage {
     const totalResult = await this.page.waitForXPath(this.totalResult);
     let value = await this.page.evaluate((el) => el.textContent, totalResult);
     console.log(`Input value ${president} is ${value.includes(president)}`);
-    return value.includes(president);
+    return value;
   }
   async checkAmountOfVideoNews() {
     const videoLabels = await this.page.waitForXPath(this.videoLabels);
