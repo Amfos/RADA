@@ -23,7 +23,7 @@ export default class ResultPage {
     console.log(`H1 is "${value}" and status - ${value === nameRadaCheck}`);
     return value;
   }
-  async checkInputValue(president) {
+  async getInputtedValue(president) {
     const totalResult = await this.page.waitForXPath(this.totalResult);
     let value = await this.page.evaluate((el) => el.textContent, totalResult);
     console.log(`Input value ${president} is ${value.includes(president)}`);
