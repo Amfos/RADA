@@ -47,8 +47,9 @@ describe("Result status", () => {
     await resultPage.checkNumberOfVideos();
   });
 
-  test("Open Rada Url", async () => {
+  test("Check images status", async () => {
     const url = "https://www.rada.gov.ua/";
     await homePage.goToHomePage(url);
+    await homePage.getAllImagesStatus();
   });
 });

@@ -1,7 +1,9 @@
 import puppeteer from "puppeteer";
+import axios from "axios";
 
 export default class HomePage {
   searchHomeButton = "input.search_button";
+  imgs = `img`;
 
   constructor(page) {
     this.page = page;
@@ -18,5 +20,17 @@ export default class HomePage {
       this.page.waitForNavigation(),
       this.page.click(this.searchHomeButton),
     ]);
+  }
+  async getAllImagesStatus() {
+    const allImages = await this.page.$$eval(this.imgs, (allImages) =>
+      allImages.map((image) => image.src)
+    );
+    allImages.forEach((element) => {
+      axios
+        .get(element)
+        .then((response) =>
+          console.log(`${element} has status ${response.status}`)
+        );
+    });
   }
 }

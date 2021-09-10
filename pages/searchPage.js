@@ -5,7 +5,7 @@ export default class SearchPage {
   sectionButton = 'button[data-id="exampleTheme"]';
   dropDownItem = "//*[@class='dropdown-menu show']//span[text()='Новини']";
   radioCheckBoxButton = "//label[@for='date_type1']";
-  searchButton = "//form[@id='sendForm']/a[@class='btn btn-yellow sendcomm']";
+  searchButton = "//form[@id='sendForm']//a[@class='btn btn-yellow sendcomm']";
 
   constructor(page) {
     this.page = page;
