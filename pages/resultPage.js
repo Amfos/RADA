@@ -28,16 +28,7 @@ export default class ResultPage {
     console.log(`Input value ${president} is ${value.includes(president)}`);
     return value;
   }
-  // async checkAmountOfVideoNews() {
-  //   const videoLabels = await this.page.waitForXPath(this.videoLabels);
-  //   let videos = await this.page.evaluate(
-  //     (el) => el.getElementsByClassName("btn-video"),
-  //     videoLabels
-  //   );
 
-  //   const countedVideoNews = Object.keys(videos).length;
-  //   console.log(`News with video stream = ${countedVideoNews}`);
-  // }
   async checkNumberOfVideos() {
     const videoLabelss = await this.page.$x(this.videoLabel);
     console.log(`News with video stream = ${videoLabelss.length}`);
