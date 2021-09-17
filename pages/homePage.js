@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer, { errors, keyDefinitions } from "puppeteer";
 import axios from "axios";
 
 export default class HomePage {
@@ -22,15 +22,25 @@ export default class HomePage {
     ]);
   }
   async getAllImagesStatus() {
+    const testArr = [
+      "https://www.rada.gov.ua/img/print-logo.png",
+      "https://www.rada.gov.ua/2uploads/logos/c5d0c708ca35a9c80$$$8f8280017002df3.jpeg",
+      "https://www.rada.gov.ua/upl2oads/logos/a0afe676c52ef4$$1cb6bde15742f2a6a2.jpeg",
+    ];
+    const arrWithCorruptedImages = [];
     const allImages = await this.page.$$eval(this.imgs, (allImages) =>
       allImages.map((image) => image.src)
     );
-    allImages.forEach((element) => {
-      axios
-        .get(element)
-        .then((response) =>
-          console.log(`${element} has status ${response.status}`)
-        );
-    });
+    for (const image of allImages) {
+      const resp = await axios.get(image, {
+        validateStatus: function (status) {
+          return status < 500;
+        },
+      });
+      if (resp.status != 200) {
+        arrWithCorruptedImages.push(image);
+      }
+    }
+    return arrWithCorruptedImages;
   }
 }

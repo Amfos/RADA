@@ -9,28 +9,26 @@ export default class ResultPage {
     this.page = page;
   }
 
-  async numberOfResults() {
+  async getNumberOfResult() {
     const totalResult = await this.page.waitForXPath(this.totalResult);
-    let value = await this.page.evaluate((el) => el.textContent, totalResult);
-    console.log(
-      `Total number is = ${parseInt(value.replaceAll(/[^0-9]/g, ""))}`
-    );
+    const value = await this.page.evaluate((el) => el.innerText, totalResult);
+    const res = value.replace(/[^0-9]/g, "");
+    return res;
   }
-  async headerRadaCheck(nameRadaCheck) {
+
+  async getTextFromHeader() {
     const h1Rada = await this.page.waitForXPath(this.h1Rada);
     let value = await this.page.evaluate((el) => el.textContent, h1Rada);
-    console.log(`H1 is "${value}" and status - ${value === nameRadaCheck}`);
     return value;
   }
-  async getInputtedValue(president) {
+  async getInputtedText() {
     const totalResult = await this.page.waitForXPath(this.totalResult);
     let value = await this.page.evaluate((el) => el.textContent, totalResult);
-    console.log(`Input value ${president} is ${value.includes(president)}`);
     return value;
   }
 
   async checkNumberOfVideos() {
     const videoLabelss = await this.page.$x(this.videoLabel);
-    console.log(`News with video stream = ${videoLabelss.length}`);
+    return videoLabelss.length;
   }
 }

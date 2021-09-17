@@ -11,7 +11,7 @@ export default class SearchPage {
     this.page = page;
   }
 
-  async typePresidentName(president) {
+  async inputTextIntoSearchField(president) {
     await this.page.type(this.inputNameField, president);
   }
   async clickOnSectionButton() {
@@ -26,7 +26,7 @@ export default class SearchPage {
     const dropDownItem = await this.page.waitForXPath(this.dropDownItem);
     await dropDownItem.click();
   }
-  async clickRadioButton() {
+  async clickOnRadioButton() {
     const radioCheckBoxButton = await this.page.waitForXPath(
       this.radioCheckBoxButton
     );

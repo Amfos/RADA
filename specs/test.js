@@ -3,6 +3,7 @@ import puppeteer from "puppeteer";
 import HomePage from "../pages/homePage.js";
 import SearchPage from "../pages/searchPage.js";
 import ResultPage from "../pages/resultPage.js";
+import axios from "axios";
 
 describe("Result status", () => {
   let page;
@@ -36,20 +37,27 @@ describe("Result status", () => {
 
     await homePage.goToHomePage(url);
     await homePage.goToSearchPage();
-    await searchPage.typePresidentName(president);
+    await searchPage.inputTextIntoSearchField(president);
     await searchPage.clickOnSectionButton();
     await searchPage.clickOnDropDownMenu();
-    await searchPage.clickRadioButton();
+    await searchPage.clickOnRadioButton();
     await searchPage.clickOnSearch();
-    await resultPage.numberOfResults();
-    expect(await resultPage.headerRadaCheck(nameRadaCheck)).toBe(nameRadaCheck);
-    expect(await resultPage.getInputtedValue(president)).toContain(president);
-    await resultPage.checkNumberOfVideos();
+    console.log(`Search result :`, await resultPage.getNumberOfResult());
+    expect(await resultPage.getTextFromHeader()).toBe(nameRadaCheck);
+    expect(await resultPage.getInputtedText()).toContain(president);
+    console.log(
+      `Number of video labels :`,
+      await resultPage.checkNumberOfVideos()
+    );
   });
 
-  test("Check images status", async () => {
+  test("Check all images for status 200", async () => {
     const url = "https://www.rada.gov.ua/";
+
     await homePage.goToHomePage(url);
-    await homePage.getAllImagesStatus();
+    console.log(
+      await homePage.getAllImagesStatus(),
+      `Images don't have response 200`
+    );
   });
 });
