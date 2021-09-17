@@ -47,7 +47,7 @@ describe("Result status", () => {
     expect(await resultPage.getInputtedText()).toContain(president);
     console.log(
       `Number of video labels :`,
-      await resultPage.checkNumberOfVideos()
+      await resultPage.getNumberOfVideoLabels()
     );
   });
 

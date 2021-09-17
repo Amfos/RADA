@@ -27,7 +27,7 @@ export default class ResultPage {
     return value;
   }
 
-  async checkNumberOfVideos() {
+  async getNumberOfVideoLabels() {
     const videoLabelss = await this.page.$x(this.videoLabel);
     return videoLabelss.length;
   }
