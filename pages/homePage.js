@@ -31,16 +31,17 @@ export default class HomePage {
     const allImages = await this.page.$$eval(this.imgs, (allImages) =>
       allImages.map((image) => image.src)
     );
-    for (const image of allImages) {
-      const resp = await axios.get(image, {
-        validateStatus: function (status) {
-          return status < 500;
-        },
-      });
-      if (resp.status != 200) {
-        arrWithCorruptedImages.push(image);
-      }
-    }
+    const result = await Promise.all(
+      allImages.map(async (image) => {
+        try {
+          const total = await axios.get(image, {
+            validateStatus: (status) => status <= 200,
+          });
+        } catch (e) {
+          arrWithCorruptedImages.push(image);
+        }
+      })
+    );
     return arrWithCorruptedImages;
   }
 }

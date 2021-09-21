@@ -51,7 +51,7 @@ describe("Result status", () => {
     );
   });
 
-  test("Check all images for status 200", async () => {
+  test.only("Check all images for status 200", async () => {
     const url = "https://www.rada.gov.ua/";
 
     await homePage.goToHomePage(url);
