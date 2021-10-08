@@ -1,16 +1,13 @@
-import "jest-extended";
-import puppeteer from "puppeteer";
-import HomePage from "../pages/homePage.js";
-import SearchPage from "../pages/searchPage.js";
-import ResultPage from "../pages/resultPage.js";
-import axios from "axios";
+import 'jest-extended';
+import puppeteer from 'puppeteer';
+import { HomePage, SearchPage, ResultPage } from '../pages/index';
 
-describe("Result status", () => {
-  let page;
-  let homePage;
-  let searchPage;
-  let resultPage;
-  let browser;
+describe('Result status', () => {
+  let page: puppeteer.Page;
+  let homePage: HomePage;
+  let searchPage: SearchPage;
+  let resultPage: ResultPage;
+  let browser: puppeteer.Browser;
 
   beforeEach(async () => {
     browser = await puppeteer.launch({
@@ -30,10 +27,10 @@ describe("Result status", () => {
     await browser.close();
   });
 
-  test("Rada name check", async () => {
-    const president = "Президент";
-    const nameRadaCheck = "Верховна Рада України";
-    const url = "https://www.rada.gov.ua/";
+  test('Rada name check', async () => {
+    const president = 'Президент';
+    const nameRadaCheck = 'Верховна Рада України';
+    const url = 'https://www.rada.gov.ua';
 
     await homePage.goToHomePage(url);
     await homePage.goToSearchPage();
@@ -51,8 +48,8 @@ describe("Result status", () => {
     );
   });
 
-  test.only("Check all images for status 200", async () => {
-    const url = "https://www.rada.gov.ua/";
+  test.only('Check all images for status 200', async () => {
+    const url = 'https://www.rada.gov.ua';
 
     await homePage.goToHomePage(url);
     console.log(

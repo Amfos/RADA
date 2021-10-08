@@ -1,17 +1,19 @@
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer';
 
-export default class SearchPage {
+export class SearchPage {
+  page: puppeteer.Page;
+
   inputNameField = "input[name='search'].form-control";
   sectionButton = 'button[data-id="exampleTheme"]';
   dropDownItem = "//*[@class='dropdown-menu show']//span[text()='Новини']";
   radioCheckBoxButton = "//label[@for='date_type1']";
   searchButton = "//form[@id='sendForm']//a[@class='btn btn-yellow sendcomm']";
 
-  constructor(page) {
+  constructor(page: puppeteer.Page) {
     this.page = page;
   }
 
-  async inputTextIntoSearchField(president) {
+  async inputTextIntoSearchField(president: string) {
     await this.page.type(this.inputNameField, president);
   }
   async clickOnSectionButton() {
@@ -24,17 +26,17 @@ export default class SearchPage {
       timeout: 5000,
     });
     const dropDownItem = await this.page.waitForXPath(this.dropDownItem);
-    await dropDownItem.click();
+    await dropDownItem!.click();
   }
   async clickOnRadioButton() {
     const radioCheckBoxButton = await this.page.waitForXPath(
       this.radioCheckBoxButton
     );
-    await radioCheckBoxButton.click();
+    await radioCheckBoxButton!.click();
   }
 
   async clickOnSearch() {
     const searchButton = await this.page.waitForXPath(this.searchButton);
-    await searchButton.click();
+    await searchButton!.click();
   }
 }
