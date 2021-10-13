@@ -8,6 +8,8 @@ export class SearchPage {
   dropDownItem = "//*[@class='dropdown-menu show']//span[text()='Новини']";
   radioCheckBoxButton = "//label[@for='date_type1']";
   searchButton = "//form[@id='sendForm']//a[@class='btn btn-yellow sendcomm']";
+  datePickerToday = "//*[@class='datepicker-days']//*[@class='today day']";
+  dateField = "//*[@id='sendForm']//*[@name='date_point']";
 
   constructor(page: puppeteer.Page) {
     this.page = page;
@@ -29,14 +31,22 @@ export class SearchPage {
     await dropDownItem!.click();
   }
   async clickOnRadioButton() {
-    const radioCheckBoxButton = await this.page.waitForXPath(
-      this.radioCheckBoxButton
-    );
+    const radioCheckBoxButton = await this.page.waitForXPath(this.radioCheckBoxButton);
     await radioCheckBoxButton!.click();
   }
 
   async clickOnSearch() {
     const searchButton = await this.page.waitForXPath(this.searchButton);
     await searchButton!.click();
+  }
+
+  async clickOnCalendar() {
+    await (await this.page.waitForXPath(this.dateField))!.click();
+  }
+
+  async pickerToday() {
+    await (await this.page.waitForXPath(this.datePickerToday, {
+      visible: true,
+    }))!.click();
   }
 }
