@@ -5,8 +5,7 @@ export class HomePage {
   page: puppeteer.Page;
   searchHomeButton = 'input.search_button';
   imgs = `img`;
-  // footer = `//div[@id='footer']//*/@href`;
-  footer = `a[href*='://']`;
+  href = `a[href*='://']`;
 
   constructor(page: puppeteer.Page) {
     this.page = page;
@@ -48,7 +47,7 @@ export class HomePage {
   async getAllLinksStatus() {
     const arrWithCorruptedLinks: string[] = [];
 
-    const links = await this.page.$$eval(this.footer, (allLinks) => allLinks.map((el: any) => el.getAttribute('href')));
+    const links = await this.page.$$eval(this.href, (allLinks) => allLinks.map((el: any) => el.getAttribute('href')));
     for (const link of links) {
       try {
         const resp = await axios.get(link, { validateStatus: (status) => status === 200 });
