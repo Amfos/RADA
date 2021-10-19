@@ -1,4 +1,4 @@
-import puppeteer, { ElementHandle } from 'puppeteer';
+import puppeteer from 'puppeteer';
 import axios from 'axios';
 
 export class HomePage {
@@ -31,15 +31,12 @@ export class HomePage {
         return `https://www.rada.gov.ua${link.indexOf('/') == 0 ? '' : '/'}${link}`;
       })
     );
-
     for (const image of allImages) {
-      try {
-        const resp = await axios.get(image, {
-          validateStatus: (status) => status === 200,
-        });
-      } catch (e) {
-        arrWithCorruptedImages.push(`${image}`);
-      }
+      await axios.get(image).catch(function (error) {
+        if (error.status) {
+          arrWithCorruptedImages.push(image + ` - ${error.response.status}`);
+        }
+      });
     }
     return arrWithCorruptedImages;
   }
@@ -48,12 +45,14 @@ export class HomePage {
     const arrWithCorruptedLinks: string[] = [];
 
     const links = await this.page.$$eval(this.href, (allLinks) => allLinks.map((el: any) => el.getAttribute('href')));
-    for (const link of links) {
-      try {
-        const resp = await axios.get(link, { validateStatus: (status) => status === 200 });
-      } catch (e) {
-        arrWithCorruptedLinks.push(link);
-      }
+    console.log(links);
+
+    for (const el of links) {
+      await axios.get(el).catch(function (error) {
+        if (error.response) {
+          arrWithCorruptedLinks.push(el + ` - ${error.response.status}`);
+        }
+      });
     }
     return arrWithCorruptedLinks;
   }

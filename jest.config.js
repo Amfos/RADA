@@ -9,6 +9,6 @@ module.exports = {
   // ...
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   verbose: true,
-  testTimeout: 180_000,
+  testTimeout: 280_000,
   setupFilesAfterEnv: ['jest-extended'],
 };

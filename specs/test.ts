@@ -23,7 +23,7 @@ describe('Result status', () => {
   });
 
   afterEach(async () => {
-    // await browser.close();
+    await browser.close();
   });
 
   test('Rada name check', async () => {
