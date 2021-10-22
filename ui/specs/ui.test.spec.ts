@@ -1,7 +1,7 @@
 import 'jest-extended';
 import puppeteer from 'puppeteer';
 import { HomePage, SearchPage, ResultPage, GeneralMethods } from '../pages/index';
-import puppeteerConfig from '../puppeteer.config.json';
+import puppeteerConfig from '../../puppeteer.config.json';
 
 describe('Result status', () => {
   let page: puppeteer.Page;
@@ -51,7 +51,7 @@ describe('Result status', () => {
     console.log(await homePage.getAllImagesStatus(), `Images don't have response 200`);
   });
 
-  test.only('Check all FooterLinks for status 200', async () => {
+  test('Check all FooterLinks for status 200', async () => {
     const url = 'https://www.rada.gov.ua';
 
     await homePage.goToHomePage(url);

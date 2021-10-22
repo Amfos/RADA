@@ -1,14 +1,6 @@
-// module.exports = {
-//   verbose: true,
-//   testTimeout: 60_000,
-//   setupFilesAfterEnv: ['jest-extended'],
-// };
-
-const { defaults } = require('jest-config');
 module.exports = {
-  // ...
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
+  testMatch: ['**/*.spec.ts'],
+  setupFilesAfterEnv: ['jest-extended', 'jest-expect-message'],
   verbose: true,
   testTimeout: 280_000,
-  setupFilesAfterEnv: ['jest-extended'],
 };
