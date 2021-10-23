@@ -51,14 +51,14 @@ describe('Result status', () => {
     console.log(await homePage.getAllImagesStatus(), `Images don't have response 200`);
   });
 
-  test('Check all FooterLinks for status 200', async () => {
+  test('Check all links for status 200', async () => {
     const url = 'https://www.rada.gov.ua';
 
     await homePage.goToHomePage(url);
     console.log(await homePage.getAllLinksStatus(), `Links don't have response 200`);
   });
 
-  test('Сheck TodayDate between input field and picker', async () => {
+  test.only('Сheck TodayDate between input field and picker', async () => {
     const url = 'https://www.rada.gov.ua';
     const president = 'Президент';
 

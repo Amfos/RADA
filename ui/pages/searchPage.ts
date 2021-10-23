@@ -8,7 +8,8 @@ export class SearchPage {
   dropDownItem = "//*[@class='dropdown-menu show']//span[text()='Новини']";
   radioCheckBoxButton = "//label[@for='date_type1']";
   searchButton = "//form[@id='sendForm']//a[@class='btn btn-yellow sendcomm']";
-  datePickerToday = "//*[@class='datepicker-days']//*[@class='today day']";
+  datePickerToday = `//*[@class='datepicker-days']//*[@class='today day']`;
+  datePickerHighlightedDay = "//*[@class='datepicker-days']//*[@class='today highlighted day']";
   dateField = "//*[@id='sendForm']//*[@name='date_point']";
 
   constructor(page: puppeteer.Page) {
@@ -45,7 +46,7 @@ export class SearchPage {
   }
 
   async pickerToday() {
-    await (await this.page.waitForXPath(this.datePickerToday, {
+    await (await this.page.waitForXPath(this.datePickerHighlightedDay, {
       visible: true,
     }))!.click();
   }

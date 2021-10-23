@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import axios from 'axios';
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 export class HomePage {
   page: puppeteer.Page;
@@ -45,7 +46,7 @@ export class HomePage {
     const arrWithCorruptedLinks: string[] = [];
 
     const links = await this.page.$$eval(this.href, (allLinks) => allLinks.map((el: any) => el.getAttribute('href')));
-    console.log(links);
+    // console.log(links);
 
     for (const el of links) {
       await axios.get(el).catch(function (error) {

@@ -24,7 +24,7 @@ describe('Testing public API', () => {
     expect(userResponse.data.id).toEqual(allUsersResponse.data[0].id);
   });
 
-  test.only('Check create user', async () => {
+  test('Check create user', async () => {
     postUser.job = 'job_' + Date.now();
     postUser.name = 'name_' + Date.now();
 
