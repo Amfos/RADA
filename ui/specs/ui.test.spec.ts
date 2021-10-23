@@ -58,7 +58,7 @@ describe('Result status', () => {
     console.log(await homePage.getAllLinksStatus(), `Links don't have response 200`);
   });
 
-  test.only('Сheck TodayDate between input field and picker', async () => {
+  test('Сheck TodayDate between input field and picker', async () => {
     const url = 'https://www.rada.gov.ua';
     const president = 'Президент';
 
