@@ -8,3 +8,11 @@ export const USER_PATH = {
   UPTADE_USER_PATCH: `${BASE_PATH}/users`,
   DETETE_USER: `${BASE_PATH}/users/`,
 };
+
+export const REGISTER_PATH = {
+  POST_REGISTER: `${BASE_PATH}/register`,
+};
+
+export const LOGIN_PATH = {
+  POST_LOGIN: `${BASE_PATH}/login`,
+};

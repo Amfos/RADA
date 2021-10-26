@@ -23,7 +23,7 @@ const schema: JSONSchemaType<UserData> = {
   additionalProperties: true,
 };
 
-export function validate(obj: any) {
+export function validateUser(obj: any) {
   const validate = ajv.compile(schema);
   const valid = validate(obj);
   if (!valid) {
