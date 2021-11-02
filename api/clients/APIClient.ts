@@ -3,10 +3,10 @@ import axiosInstance from 'axios';
 
 export class ApiClient {
   basePath: string;
-  obj: any;
-  headers: any;
+  obj: JSON;
+  headers: object;
 
-  constructor(basePath: string, obj?: object, headers?: object) {
+  constructor(basePath: string, obj: JSON, headers: object) {
     this.basePath = basePath;
     this.obj = obj;
     this.headers = headers;
@@ -31,28 +31,28 @@ export class ApiClient {
     }
   }
 
-  postRequest = async (url: string, requestBody?: any, headers?: object) =>
+  post = async (url: string, requestBody?: object, headers?: object) =>
     await this.apiRequest({
       method: 'post',
       url,
       data: requestBody,
     });
 
-  getRequest = async (url: string, headers?: object) =>
+  get = async (url: string, headers?: object) =>
     await this.apiRequest({
       method: 'get',
       url,
       headers: headers,
     });
 
-  putRequest = async (url: string, requestBody?: any, headers?: object) =>
+  put = async (url: string, requestBody?: object, headers?: object) =>
     await this.apiRequest({
       method: 'put',
       url,
       data: requestBody,
     });
 
-  deleteRequest = async (url: string, requestBody?: any, headers?: object) =>
+  delete = async (url: string, requestBody?: object, headers?: object) =>
     await this.apiRequest({
       method: 'delete',
       url,
