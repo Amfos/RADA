@@ -1,6 +1,6 @@
 import 'jest-extended';
 import Ajv, { JSONSchemaType } from 'ajv';
-import { USER_PATH, REGISTER_PATH, LOGIN_PATH } from '../constants/constants';
+import { USER_PATH, REGISTER_PATH, LOGIN_PATH, SOURCE_PATH } from '../constants/constants';
 import { SchemaValidator } from '../clients/schemaValidator';
 import { singleUserByID, user } from '../schemes/index';
 import { ApiClient } from '../clients/APIClient';
@@ -14,12 +14,10 @@ describe('Testing public API', () => {
   let schema: any;
   let apiCLient: ApiClient;
   let basePath: string;
-  let responseBody: JSON;
-  let headers: object;
 
   beforeAll(async () => {
     schemaValidator = new SchemaValidator(obj, schema);
-    apiCLient = new ApiClient(basePath, obj, headers);
+    apiCLient = new ApiClient(basePath);
   });
 
   test('Check GET status all users', async () => {
@@ -101,6 +99,25 @@ describe('Testing public API', () => {
     expect(userResponse.data.email, 'Email should be the same').toEqual(register.email);
     expect(userResponse.data.id, 'ID should be the same').toEqual(registerResponse.id);
   });
+
+  test('Check LIST <Source>', async() => {
+    const getRequest = await apiCLient.get(SOURCE_PATH.LIST);
+    const listResponse = getRequest.data;
+    const listResponseArr = getRequest.data.data;
+    console.log(listResponseArr);
+    for(let i = 0; i < listResponseArr.length; i++){
+      try{
+        expect(listResponseArr[i]).toHaveProperty('id')
+      }catch(e){
+        console.log(e);
+      }
+    }
+
+    expect(getRequest.status, 'Status should be 200').toEqual(200);
+
+    // expect(await schemaValidator.validate(listResponse, user))
+  
+  })
 
   test('Check token after login', async () => {
     const user = { username: 'lpc10918@boofx.com', password: 'Password1!' };

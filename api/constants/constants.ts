@@ -16,3 +16,8 @@ export const REGISTER_PATH = {
 export const LOGIN_PATH = {
   POST_LOGIN: `${BASE_PATH}/login`,
 };
+
+export const SOURCE_PATH = {
+  LIST: `${BASE_PATH}/unknown`,
+  SINGLE: `${BASE_PATH}/unknown/`
+}

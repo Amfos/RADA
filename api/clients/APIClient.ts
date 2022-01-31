@@ -6,7 +6,7 @@ export class ApiClient {
   obj: JSON;
   headers: object;
 
-  constructor(basePath: string, obj: JSON, headers: object) {
+  constructor(basePath: string, obj?: any, headers?: any) {
     this.basePath = basePath;
     this.obj = obj;
     this.headers = headers;
